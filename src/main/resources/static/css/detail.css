@@ -1,0 +1,39 @@
+.blog{
+
+}
+hr{
+    border: 0;
+    background-color: black;
+    height: 1px;
+}
+.blog h2{
+    text-align: center;
+}
+.blog .content{
+    font-size: 18px;
+}
+.blog .blog-lable{
+    text-align: right;
+}
+.reply{
+    margin-top: 50px;
+}
+.reply hr{
+    margin-bottom: 5px;
+}
+.comment{
+    position: relative;
+    height: 80px;
+}
+.comment hr{
+    margin-top: 55px;
+}
+.footer{
+    position: absolute;
+    top: 50px;
+}
+.form-horizontal .form-group{
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 20px;
+}

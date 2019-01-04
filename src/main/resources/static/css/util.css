@@ -1,0 +1,15 @@
+.noSelect{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.noLine{
+    text-decoration-line: none;
+}
+a:hover{
+    text-decoration-line: none;
+}
+.current{
+    color: black !important;
+}

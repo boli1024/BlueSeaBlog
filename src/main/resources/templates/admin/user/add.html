@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    <title>后台管理页面</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/css/backmanage.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">后台管理系统</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="" class="current">用户管理</a></li>
+                <li><a href="/admin/blog/">博客管理</a></li>
+                <li><a href="/admin/category/">类别管理</a></li>
+                <li><a href="/admin/comment/">评论管理</a></li>
+                <li><a href="/admin/image/">图片管理</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="col-md-12">
+        <div class="page-header">用户管理</div>
+        <ul class="nav nav-tabs">
+            <li><a href="/admin/user/all">用户列表</a></li>
+            <li><a href="">用户搜索</a></li>
+            <li class="active"><a>用户添加</a></li>
+        </ul>
+        <form action="/admin/user/add" method="post" class="form-horizontal" role="form" style="padding: 40px 0 0 0">
+            <div class="form-group">
+                <label for="name" class="col-sm-1 control-label">用户名</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="name" type="text" name="name" placeholder="请输入用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pwd" class="col-sm-1 control-label">密码</label>
+                <div class="col-sm-9">
+                    <input class="form-control" id="pwd" type="password" name="password" placeholder="请输入密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="self" class="col-sm-1 control-label">简介</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control from-textarea" id="self" name="introduction" placeholder="请输入简介" style="height: 100px"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <button type="submit" class="btn btn-success">添加</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+</html>

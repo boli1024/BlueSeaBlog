@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boli.blog.dao.SettingDao">
+
+    <select id="selectByUserId" resultType="boli.blog.entity.Setting">
+        select * from setting where userId=#{userId}
+    </select>
+
+    <insert id="insert">
+        insert into setting(userId,image) values (#{userId},#{image})
+    </insert>
+
+    <update id="updateImage">
+        update setting set image=#{image} where userId=#{userId}
+    </update>
+
+</mapper>

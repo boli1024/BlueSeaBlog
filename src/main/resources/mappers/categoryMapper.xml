@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boli.blog.dao.CategoryDao">
+
+    <select id="selectAll" resultType="boli.blog.entity.Category">
+        select * from category
+    </select>
+
+    <select id="selectById" resultType="boli.blog.entity.Category">
+        select * from category where id=#{id}
+    </select>
+
+    <insert id="insert">
+        insert into category(name,introduction) values(#{name},#{introduction})
+    </insert>
+
+    <delete id="deleteById">
+        delete from category where id=#{id}
+    </delete>
+
+</mapper>

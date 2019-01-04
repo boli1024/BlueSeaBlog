@@ -1,0 +1,13 @@
+.form-horizontal .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-horizontal .form-group textarea{
+    height: 500px;
+    resize: none;
+    overflow: scroll;
+}
+.form-horizontal .form-group label{
+    font-size: 20px;
+    margin-left: 5px;
+}

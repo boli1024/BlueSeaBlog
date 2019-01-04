@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boli.blog.dao.BlogDao">
+    
+    <resultMap id="blogAndCategory" type="boli.blog.entity.Blog">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <result column="createTime" property="createTime" />
+        <result column="readTimes" property="readTimes" />
+        <result column="userId" property="userId" />
+        <association property="user" column="userId" select="boli.blog.dao.UserDao.selectById" javaType="boli.blog.entity.User" />
+        <association property="category" column="categoryId" select="boli.blog.dao.CategoryDao.selectById" javaType="boli.blog.entity.Category"/>
+        <collection property="comments" column="id" select="boli.blog.dao.CommentDao.selectByBlogId" />
+    </resultMap>
+
+    <select id="selectAll" resultMap="blogAndCategory">
+        select * from blog order by createTime desc
+    </select>
+
+    <select id="selectById" resultMap="blogAndCategory">
+        select * from blog where id=#{id}
+    </select>
+
+    <select id="selectByUserIdAndCategoryId" resultType="boli.blog.entity.Blog">
+        select * from blog where userId=#{userId} and categoryId=#{categoryId} order by createTime desc
+    </select>
+
+    <select id="selectByUserId" resultMap="blogAndCategory">
+        select * from blog where userId=#{userId} order by createTime desc
+    </select>
+
+    <delete id="deleteById">
+        delete from blog where id=#{id}
+    </delete>
+
+    <insert id="insert">
+        insert into blog(title,content,createTime,readTimes,categoryId,userId) values(#{title},#{content},#{createTime},#{readTimes},#{categoryId},#{userId})
+    </insert>
+
+    <update id="updateReadTimes">
+        update blog set readTimes=readTimes+1 where id=#{id}
+    </update>
+
+</mapper>

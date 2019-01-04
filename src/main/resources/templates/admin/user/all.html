@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    <title>后台管理页面</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/backmanage.css" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">后台管理系统</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="" class="current">用户管理</a></li>
+                <li><a href="/admin/blog/">博客管理</a></li>
+                <li><a href="/admin/category/">类别管理</a></li>
+                <li><a href="/admin/comment/">评论管理</a></li>
+                <li><a href="/admin/image/">图片管理</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="col-md-12">
+        <div class="page-header">用户管理</div>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">用户列表</a></li>
+            <li><a href="/admin/user/searchPre">用户搜索</a></li>
+            <li><a href="/admin/user/addPre">用户添加</a></li>
+        </ul>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>简介</th>
+                <th>粉丝</th>
+                <th>关注</th>
+                <th>注册时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                <tr th:each="user:${users}">
+                    <th scope="row" th:text="${user.getId()}"></th>
+                    <td th:text="${user.getName()}"></td>
+                    <td th:text="${user.getPassword()}"></td>
+                    <td th:text="${user.getIntroduction()}"></td>
+                    <td th:text="${user.getFans()}"></td>
+                    <td th:text="${user.getFollow()}"></td>
+                    <td th:text="${user.getRegisterTime()}"></td>
+                    <td>
+                        <div role="presentation" class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                操作<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a th:href="@{updatePre(id=${user.getId()})}">修改信息</a></li>
+                                <li><a th:href="@{delete(id=${user.getId()})}">删除用户</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+</html>

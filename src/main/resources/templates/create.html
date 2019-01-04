@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>发表博客</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/create.css">
+</head>
+<body th:with="user=${#session.getAttribute('currentUser')}">
+<div class="container">
+    <div class="col-lg-12" style="height: 1080px; background-color:rgba(255,255,255,0.5)">
+        <h1 class="title" th:text="${user}+'的个人博客'">二狗的个人博客</h1>
+        <!--导航栏-->
+        <nav id="navbar" class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">社区主页</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">个人博客</a></li>
+                        <li><a>个人资料</a></li>
+                        <li><a>博客分类</a></li>
+                        <li><a href="/set/setting">自定义设置</a></li>
+                        <li><a class="current">发表博客</a></li>
+                        <li><a href="/image/all">图片管理</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!--表单-->
+        <form action="/blog/create" class="form-horizontal" method="post" role="form">
+            <div class="form-group">
+                <label for="1">标题</label>
+                <input id="1" class="form-control" type="text" th:value="${blog.getTitle()}" name="title" placeholder="请输入标题">
+            </div>
+            <div class="form-group">
+                <label for="2">类别</label>
+                <select class="form-control" id="2" name="categoryId">
+                    <option th:each="category:${categories}" value="1" th:value="${category.getId()}" th:text="${category.getName()}">Java</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editor">内容</label>
+                <textarea id="editor" class="form-control" name="content" th:text="${blog.getContent()}"></textarea>
+            </div>
+            <div class="form-group">
+                <input class="form-control btn-success" type="submit" value="发表">
+            </div>
+        </form>
+
+        <!--展示错误信息-->
+        <div th:if="${results ne null}">
+            <div class="alert alert-danger" th:each="result:${results}" th:text="${result}"></div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.js"></script>
+<script type="text/javascript" src="/static/js/util.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript" src="/static/kindeditor/kindeditor-all-min.js"></script>
+<script type="text/javascript" src="/static/kindeditor/lang/zh-CN.js"></script>
+<script>
+    let KE;
+    KindEditor.ready(function (K) {
+        KE = K.create("#editor",{
+            uploadJson:'/blog/upload',
+            afterBlur: function(){ this.sync(); }, //编辑器失去焦点(blur)时执行的回调函数（将编辑器的HTML数据同步到textarea）
+            afterUpload : function(url, data) { //上传文件后执行的回调函数，必须为3个参数
+                    var img = new Image(); img.src = url;
+                    img.onload = function(){ //图片必须加载完成才能获取尺寸
+                        if(img.width>800) KE.html(KE.html().replace('<img src="' + url + '"','<img src="' + url + '" width="800"'))
+                    }
+            }
+        });
+    });
+</script>
+<script th:fragment="scripts(scripts)">
+    let backImg = "url([[${#session.getAttribute('backImage')}]])";
+    document.body.style.backgroundImage = backImg;
+</script>
+</html>
